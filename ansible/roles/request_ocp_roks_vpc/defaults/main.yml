@@ -1,8 +1,13 @@
 ---
 hardware: shared
-kubeVersion: 4.6_openshift
-defaultPoolSize: 2
+kubeVersion: 4.10_openshift
+defaultPoolSize: 1
 resourceGroup: default
 cloudregion: us-south
 entitlement: cloud_pak
 force_deletet_storage: true
+cos_instance_crn: crn:v1:bluemix:public:cloud-object-storage:global:a/cd3d726526ba4a2b84ee6d6cc7072d87:e278f8f5-9079-4955-80dd-559c3c990e5c::
+subnet_id_1: 0717-4860e1f2-c8cc-4e29-9bfe-5e72bccb1a44
+subnet_id_2: 0727-5a7f883f-d2fa-4a7f-b9d5-af75e3e066f3
+subnet_id_3: 0737-e2a8c193-2950-407c-b74c-53f214b034bc
+vpc_id: r006-f040b2f0-4c45-4e8a-aa50-0c12cf0ce942

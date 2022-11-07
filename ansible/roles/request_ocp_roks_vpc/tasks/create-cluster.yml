@@ -12,19 +12,22 @@
   ibm.cloudcollection.ibm_container_vpc_cluster:
     flavor: "{{ machineType }}"
     name: "{{ clusterName }}"
-    vpc_id: "{{ vpc_id | default('cluster-pooling-vpc') }}"
+    vpc_id: "{{ vpc_id | default('r006-f040b2f0-4c45-4e8a-aa50-0c12cf0ce942') }}"
     zones:
-      - Dallas 1
-      - Dallas 2
-      - Dallas 3
-    tags:
-      - nick
-      - test
+      - name: "{{ cloudregion | default('us-south') }}-1"
+        subnet_id: "{{ subnet_id_1 | default('0717-4860e1f2-c8cc-4e29-9bfe-5e72bccb1a44') }}"
+      - name: "{{ cloudregion | default('us-south') }}-2"
+        subnet_id: "{{ subnet_id_2 | default('0727-5a7f883f-d2fa-4a7f-b9d5-af75e3e066f3') }}"
+      - name: "{{ cloudregion | default('us-south') }}-3"
+        subnet_id: "{{ subnet_id_3 | default('0737-e2a8c193-2950-407c-b74c-53f214b034bc') }}"
     force_delete_storage: "{{ force_deletet_storage }}"
     kube_version: "{{ kubeVersion }}"
     resource_group_id: "{{ rg.id }}"
     ibmcloud_api_key: "{{ apikey }}"
     entitlement: "{{ entitlement }}"
+    cos_instance_crn: "{{ cos_instance_crn | default('crn:v1:bluemix:public:cloud-object-storage:global:a/cd3d726526ba4a2b84ee6d6cc7072d87:e278f8f5-9079-4955-80dd-559c3c990e5c::') }}"
+    worker_count: "{{ defaultPoolSize }}"
+
   async: 86400 #timeout after 1 day
   poll: 0
   register: long_task
