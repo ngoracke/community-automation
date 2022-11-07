@@ -12,7 +12,7 @@
   ibm.cloudcollection.ibm_container_vpc_cluster:
     flavor: "{{ machineType }}"
     name: "{{ clusterName }}"
-    vpc_id: "{{ vpc_id | default'('cluster-pooling-vpc') }}"
+    vpc_id: "{{ vpc_id | default('cluster-pooling-vpc') }}"
     zones:
       - "Dallas 1"
       - "Dallas 2"
