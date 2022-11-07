@@ -1,0 +1,36 @@
+---
+- name: get-resource-group
+  ibm.cloudcollection.ibm_resource_group_info:
+    name: "{{ resourceGroup }}"
+    ibmcloud_api_key: "{{ apikey }}"
+  register: output_resource_group
+
+- name: set-fact-resource-group-id
+  set_fact: rg="{{ output_resource_group.resource }}"
+    
+- name: create-cluster async
+  ibm.cloudcollection.ibm_container_vpc_cluster:
+    flavor: "{{ machineType }}"
+    name: "{{ clusterName }}"
+    vpc_id: "{{ vpc_id | default'('cluster-pooling-vpc') }}"
+    zones:
+      - "Dallas 1"
+      - "Dallas 2"
+      - "Dallas 3"
+    force_delete_storage: "{{ force_deletet_storage }}"
+    kube_version: "{{ kubeVersion }}"
+    resource_group_id: "{{ rg.id }}"
+    ibmcloud_api_key: "{{ apikey }}"
+    entitlement: "{{ entitlement }}"
+  async: 86400 #timeout after 1 day
+  poll: 0
+  register: long_task
+  
+- name: Check on an async task
+  async_status:
+    jid: "{{ long_task.ansible_job_id }}"
+  register: long_task_result
+  until: long_task_result.finished
+  retries: 120 # Retries for 2 hours
+  delay: 60  
+  

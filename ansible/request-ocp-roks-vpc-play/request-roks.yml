@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  vars_files:
+    - request-roks-vars.yml
+  collections:
+    - ibm.cloudcollection
+
+  tasks:
+    - name: create roks cluster
+      import_role: 
+        name: request_ocp_roks
