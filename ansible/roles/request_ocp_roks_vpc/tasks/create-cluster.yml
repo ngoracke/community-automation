@@ -31,7 +31,7 @@
   async: 86400 #timeout after 1 day
   poll: 0
   register: long_task
-  when: (subnet_id_1|default('a')|length != 1) and (subnet_id_2|default('a')|length != 1) and (subnet_id_3|default('a')|length != 1)
+  when: (subnet_id_1 is defined and subnet_id_1) and (subnet_id_2 is defined and subnet_id_2) and (subnet_id_3 is defined and submit_id_3)
 
 - name: Check on an async task
   async_status:
@@ -39,8 +39,8 @@
   register: long_task_result
   until: long_task_result.finished
   retries: 120 # Retries for 2 hours
-  delay: 60 
-  when: (subnet_id_1|default('a')|length != 1) and (subnet_id_2|default('a')|length != 1) and (subnet_id_3|default('a')|length != 1) 
+  delay: 60
+  when: (subnet_id_1 is defined and subnet_id_1) and (subnet_id_2 is defined and subnet_id_2) and (subnet_id_3 is defined and submit_id_3) 
 
 - name: create-cluster async with 2 subnets
   ibm.cloudcollection.ibm_container_vpc_cluster:
@@ -63,7 +63,7 @@
   async: 86400 #timeout after 1 day
   poll: 0
   register: long_task
-  when: (subnet_id_1|default('a')|length != 1) and (subnet_id_2|default('a')|length != 1) and (subnet_id_3|default('a')|length == 1)
+  when: (subnet_id_1 is defined and subnet_id_1) and (subnet_id_2 is defined and subnet_id_2) and (subnet_id_3 is defined and not submit_id_3)
 
 - name: Check on an async task
   async_status:
@@ -72,7 +72,7 @@
   until: long_task_result.finished
   retries: 120 # Retries for 2 hours
   delay: 60
-  when: (subnet_id_1|default('a')|length != 1) and (subnet_id_2|default('a')|length != 1) and (subnet_id_3|default('a')|length == 1)
+  when: (subnet_id_1 is defined and subnet_id_1) and (subnet_id_2 is defined and subnet_id_2) and (subnet_id_3 is defined and not submit_id_3)
 
 - name: create-cluster async with 1 subnet
   ibm.cloudcollection.ibm_container_vpc_cluster:
@@ -93,7 +93,7 @@
   async: 86400 #timeout after 1 day
   poll: 0
   register: long_task
-  when: (subnet_id_1|default('a')|length != 1) and (subnet_id_2|default('a')|length == 1) and (subnet_id_3|default('a')|length == 1)
+  when: (subnet_id_1 is defined and subnet_id_1) and (subnet_id_2 is defined and not subnet_id_2) and (subnet_id_3 is defined and not submit_id_3)
   
 - name: Check on an async task
   async_status:
@@ -102,4 +102,4 @@
   until: long_task_result.finished
   retries: 120 # Retries for 2 hours
   delay: 60  
-  when: (subnet_id_1|default('a')|length != 1) and (subnet_id_2|default('a')|length == 1) and (subnet_id_3|default('a')|length == 1)  
+  when: (subnet_id_1 is defined and subnet_id_1) and (subnet_id_2 is defined and not subnet_id_2) and (subnet_id_3 is defined and not submit_id_3)
