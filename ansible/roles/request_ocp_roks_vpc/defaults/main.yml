@@ -8,6 +8,6 @@ entitlement: cloud_pak
 force_deletet_storage: true
 cos_instance_crn: "crn:v1:bluemix:public:cloud-object-storage:global:a/cd3d726526ba4a2b84ee6d6cc7072d87:e278f8f5-9079-4955-80dd-559c3c990e5c::"
 subnet_id_1: 0717-57c5aad8-30fa-4d38-8f77-e715b22c1bf3
-subnet_id_2: 0727-2271172c-da21-4294-a0da-0123f4ef7baf
-subnet_id_3: 0737-86b4a1e8-9aed-4a2c-871e-9c3725ff073f
+#subnet_id_2: 0727-2271172c-da21-4294-a0da-0123f4ef7baf
+#subnet_id_3: 0737-86b4a1e8-9aed-4a2c-871e-9c3725ff073f
 vpc_id: r006-f040b2f0-4c45-4e8a-aa50-0c12cf0ce942
